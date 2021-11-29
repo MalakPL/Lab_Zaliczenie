@@ -1,15 +1,16 @@
 #include "GameOfLife.h"
 #include <Windows.h>
+#include "Window.h"
 
 GameOfLife::GameOfLife(int Width, int Height)
 {
 	this->Width = Width;
 	this->Height = Height;
-	this->Grid = new bool[Width * Height];
-	this->TempGrid = new bool[Width * Height];
+	this->Size = Width * Height;
+	this->Grid = new bool[Size];
+	this->TempGrid = new bool[Size];
 
-	memset(Grid, false, Width * Height);
-	memset(TempGrid, false, Width * Height);
+	Clear();
 }
 
 auto GameOfLife::RandomGrid() -> void {
@@ -30,13 +31,19 @@ auto GameOfLife::SetState(int X, int Y, bool State) -> void {
 	Grid[Y * Width + X] = State;
 }
 
-auto GameOfLife::Update() -> void {
-	if (GetAsyncKeyState((int)'R') == -32767)
+auto GameOfLife::Update() -> void 
+{
+	if (isPaused) { return; }
+
+	if (Window::isActive())
 	{
-		RandomGrid();
+		if (GetAsyncKeyState((int)'R') == -32767)
+		{
+			RandomGrid();
+		}
 	}
 
-	memset(TempGrid, false, Width * Height);
+	memset(TempGrid, false, Size);
 
 	for (int X = 1; X < Width - 1; X++)
 	{
@@ -63,7 +70,7 @@ auto GameOfLife::Update() -> void {
 		}
 	}
 
-	memcpy(Grid, TempGrid, Width * Height);
+	memcpy(Grid, TempGrid, Size);
 }
 
 auto GameOfLife::Render(ScreenBuffer& ScreenBuffer) -> void
@@ -74,8 +81,17 @@ auto GameOfLife::Render(ScreenBuffer& ScreenBuffer) -> void
 		{
 			if (GetState(X, Y))
 			{
-				ScreenBuffer.SetPoint(X, Y, '*');
+				CHAR_INFO Char;
+				Char.Char.UnicodeChar = '*';
+				Char.Attributes = isPaused ? 8 : 15;
+
+				ScreenBuffer.SetPoint(X, Y, Char);
 			}
 		}
 	}
+}
+
+auto GameOfLife::Clear() -> void {
+	memset(Grid, false, Size);
+	memset(TempGrid, false, Size);
 }

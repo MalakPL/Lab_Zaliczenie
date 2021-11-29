@@ -9,10 +9,14 @@ class GameOfLife
 private:
 	bool* Grid;
 	bool* TempGrid;
+	int Size;
+
+public:
 	int Width;
 	int Height;
 
-public:
+	bool isPaused;
+
 	GameOfLife(int Width, int Height);
 
 	auto RandomGrid() -> void;
@@ -20,5 +24,6 @@ public:
 	auto SetState(int X, int Y, bool State) -> void;
 	auto Update() -> void;
 	auto Render(ScreenBuffer&) -> void;
+	auto Clear() -> void;
 };
 

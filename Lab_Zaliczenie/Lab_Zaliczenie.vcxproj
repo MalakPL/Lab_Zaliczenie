@@ -142,10 +142,12 @@
     <ClCompile Include="GameOfLife.cpp" />
     <ClCompile Include="Lab_Zaliczenie.cpp" />
     <ClCompile Include="ScreenBuffer.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameOfLife.h" />
     <ClInclude Include="ScreenBuffer.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
