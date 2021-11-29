@@ -21,6 +21,7 @@ public:
 
 	auto Clear() -> void;
 	auto SetPoint(int X, int Y, const CHAR_INFO Char) -> void;
+	auto SetPoint(int X, int Y, const WORD Attribute) -> void;
 	auto SetText(int X, int Y, wstring Text, WORD Attribute) -> void;
 	auto SetRect(int X, int Y, int W, int H, WORD Attribute) -> void;
 

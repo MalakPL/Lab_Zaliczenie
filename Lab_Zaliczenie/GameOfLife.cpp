@@ -31,6 +31,7 @@ auto GameOfLife::SetState(int X, int Y, bool State) -> void {
 	Grid[Y * Width + X] = State;
 }
 
+/* Logika */
 auto GameOfLife::Update() -> void 
 {
 	if (isPaused) { return; }
@@ -43,6 +44,7 @@ auto GameOfLife::Update() -> void
 		}
 	}
 
+	/* Czyszczenie tymczsowego grida */
 	memset(TempGrid, false, Size);
 
 	for (int X = 1; X < Width - 1; X++)
@@ -61,6 +63,8 @@ auto GameOfLife::Update() -> void
 
 			aliveNeighbours -= GetState(X, Y);
 
+			/* https://pl.wikipedia.org/wiki/Gra_w_%C5%BCycie */
+
 			if (!GetState(X, Y) && (aliveNeighbours == 3))
 				TempGrid[Y * Width + X] = true;
 			else if (GetState(X, Y) && (aliveNeighbours == 2 || aliveNeighbours == 3))
@@ -70,6 +74,7 @@ auto GameOfLife::Update() -> void
 		}
 	}
 
+	/* Czyszczenie grida */
 	memcpy(Grid, TempGrid, Size);
 }
 

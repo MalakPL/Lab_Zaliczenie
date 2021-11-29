@@ -1,23 +1,13 @@
 #include "Window.h"
 
+/* Klasa okna konsoli */
+
 HANDLE Window::Handle = nullptr;
-auto Window::Init() -> void
+auto Window::Init(const wchar_t* Title) -> void
 {
-	SetConsoleTitleW(L"ANOVEI");
+	SetConsoleTitleW(Title);
 
 	Handle = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-
-	/*SMALL_RECT windowSize = {0, 0, 299, 49};
-	SetConsoleWindowInfo(Handle, TRUE, &windowSize);
-
-	COORD c = { 300, 50 };
-	SetConsoleScreenBufferSize(Handle, c);
-
-	/*PCOORD a = new COORD();
-	a->X = 123;
-	a->Y = 123;
-	SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, a);*/
-
 
 	SetConsoleActiveScreenBuffer(Handle);
 }

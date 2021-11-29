@@ -7,7 +7,7 @@ class Window
 public:
 	static HANDLE Handle;
 
-	static auto Init() -> void;
+	static auto Init(const wchar_t* Title) -> void;
 
 	static auto CursorVisible(bool) -> void;
 	static auto Render(ScreenBuffer&) -> void;

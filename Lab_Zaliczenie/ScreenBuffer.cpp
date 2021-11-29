@@ -11,6 +11,11 @@ auto ScreenBuffer::SetPoint(int X, int Y, const CHAR_INFO Char) -> void
 	*(Buffer + (Y * Width) + X) = Char;
 }
 
+auto ScreenBuffer::SetPoint(int X, int Y, const WORD Attribute) -> void
+{
+	(Buffer + (Y * Width) + X)->Attributes = Attribute;
+}
+
 auto ScreenBuffer::SetText(int X, int Y, wstring Text, WORD Attribute) -> void
 {
 	for (int i = 0; i < Text.length(); i++)
