@@ -67,55 +67,58 @@ void Update()
 			Game.isPaused = !Game.isPaused;
 		}
 
-		/* Klawisz do poruszania kursorem */
-		if (GetAsyncKeyState(VK_LEFT) == -32767)
+		if (Game.isPaused)
 		{
-			CursorX--;
-		}
+			/* Zmiana punktu na scenie */
+			if (GetAsyncKeyState(VK_SPACE) == -32767)
+			{
+				Game.SetState(CursorX, CursorY, !Game.GetState(CursorX, CursorY));
+			}
 
-		/* Klawisz do poruszania kursorem */
-		if (GetAsyncKeyState(VK_RIGHT) == -32767)
-		{
-			CursorX++;
-		}
+			/* Klawisz do poruszania kursorem */
+			if (GetAsyncKeyState(VK_LEFT) == -32767)
+			{
+				CursorX--;
+			}
 
-		/* Klawisz do poruszania kursorem */
-		if (GetAsyncKeyState(VK_UP) == -32767)
-		{
-			CursorY--;
-		}
+			/* Klawisz do poruszania kursorem */
+			if (GetAsyncKeyState(VK_RIGHT) == -32767)
+			{
+				CursorX++;
+			}
 
-		/* Klawisz do poruszania kursorem */
-		if (GetAsyncKeyState(VK_DOWN) == -32767)
-		{
-			CursorY++;
-		}
+			/* Klawisz do poruszania kursorem */
+			if (GetAsyncKeyState(VK_UP) == -32767)
+			{
+				CursorY--;
+			}
 
-		/* Bezpieczna strefa kursora */
-		if (CursorX > Game.Width - 2)
-		{
-			CursorX = Game.Width - 2;
-		}
+			/* Klawisz do poruszania kursorem */
+			if (GetAsyncKeyState(VK_DOWN) == -32767)
+			{
+				CursorY++;
+			}
 
-		if (CursorX < 1)
-		{
-			CursorX = 1;
-		}
+			/* Bezpieczna strefa kursora */
+			if (CursorX > Game.Width - 2)
+			{
+				CursorX = Game.Width - 2;
+			}
 
-		if (CursorY > Game.Height - 2)
-		{
-			CursorY = Game.Height - 2;
-		}
+			if (CursorX < 1)
+			{
+				CursorX = 1;
+			}
 
-		if (CursorY < 1)
-		{
-			CursorY = 1;
-		}
+			if (CursorY > Game.Height - 2)
+			{
+				CursorY = Game.Height - 2;
+			}
 
-		/* Zmiana punktu na scenie */
-		if (GetAsyncKeyState(VK_SPACE) == -32767)
-		{
-			Game.SetState(CursorX, CursorY, !Game.GetState(CursorX, CursorY));
+			if (CursorY < 1)
+			{
+				CursorY = 1;
+			}
 		}
 	}
 
@@ -132,7 +135,7 @@ void Render()
 	Game.Render(Screen);
 
 	/* Renderujemy GUI */
-	Screen.SetText(2, Screen.Height - 7, L"Press C to clear", Game.isPaused ? 8 : 10);
+	Screen.SetText(2, Screen.Height - 7, L"Press C to clear", 10);
 	Screen.SetText(2, Screen.Height - 6, L"Press R to random", Game.isPaused ? 8 : 10);
 	Screen.SetText(2, Screen.Height - 5, L"Press P to pause", 10);
 	Screen.SetText(2, Screen.Height - 4, L"Press ←↑↓→ to move cursor (in pause mode)", Game.isPaused ? 10 : 8);

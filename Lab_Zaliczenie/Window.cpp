@@ -17,8 +17,6 @@ auto Window::SetSize(int W, int H) -> void
 
 }
 
-
-
 auto Window::CursorVisible(bool Visible) -> void
 {
 	CONSOLE_CURSOR_INFO cursorInfo;
