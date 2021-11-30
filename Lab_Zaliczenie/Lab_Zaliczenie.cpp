@@ -132,25 +132,27 @@ void Render()
 	Game.Render(Screen);
 
 	/* Renderujemy GUI */
-	Screen.SetText(2, Screen.Height - 7, L"Press C to clear", 10);
-	Screen.SetText(2, Screen.Height - 6, L"Press R to random", 10);
+	Screen.SetText(2, Screen.Height - 7, L"Press C to clear", Game.isPaused ? 8 : 10);
+	Screen.SetText(2, Screen.Height - 6, L"Press R to random", Game.isPaused ? 8 : 10);
 	Screen.SetText(2, Screen.Height - 5, L"Press P to pause", 10);
-	Screen.SetText(2, Screen.Height - 4, L"Press ←↑↓→ to move cursor", 10);
-	Screen.SetText(2, Screen.Height - 3, L"Press Space to add object (in pause mode)", 10);
+	Screen.SetText(2, Screen.Height - 4, L"Press ←↑↓→ to move cursor (in pause mode)", Game.isPaused ? 10 : 8);
+	Screen.SetText(2, Screen.Height - 3, L"Press Space to add object (in pause mode)", Game.isPaused ? 10 : 8);
+	Screen.SetText(2, Screen.Height - 2, L"Author: Karol Szmajda", 4);
 
-	Screen.SetText(73, Screen.Height - 7, L" █████╗ ███╗  ██╗ █████╗ ██╗   ██╗███████╗██╗", 10);
-	Screen.SetText(73, Screen.Height - 6, L"██╔══██╗████╗ ██║██╔══██╗██║   ██║██╔════╝██║", 10);
-	Screen.SetText(73, Screen.Height - 5, L"███████║██╔██╗██║██║  ██║╚██╗ ██╔╝█████╗  ██║", 10);
-	Screen.SetText(73, Screen.Height - 4, L"██╔══██║██║╚████║██║  ██║ ╚████╔╝ ██╔══╝  ██║", 10);
-	Screen.SetText(73, Screen.Height - 3, L"██║  ██║██║ ╚███║╚█████╔╝  ╚██╔╝  ███████╗██║", 10);
-	Screen.SetText(73, Screen.Height - 2, L"╚═╝  ╚═╝╚═╝  ╚══╝ ╚════╝    ╚═╝   ╚══════╝╚═╝", 10);
+
+	Screen.SetText(54, Screen.Height - 7, L" █████╗ ███╗  ██╗ █████╗ ██╗   ██╗███████╗██╗   ██████╗ ██╗     ", 10);
+	Screen.SetText(54, Screen.Height - 6, L"██╔══██╗████╗ ██║██╔══██╗██║   ██║██╔════╝██║   ██╔══██╗██║     ", 10);
+	Screen.SetText(54, Screen.Height - 5, L"███████║██╔██╗██║██║  ██║╚██╗ ██╔╝█████╗  ██║   ██████╔╝██║     ", 10);
+	Screen.SetText(54, Screen.Height - 4, L"██╔══██║██║╚████║██║  ██║ ╚████╔╝ ██╔══╝  ██║   ██╔═══╝ ██║     ", 10);
+	Screen.SetText(54, Screen.Height - 3, L"██║  ██║██║ ╚███║╚█████╔╝  ╚██╔╝  ███████╗██║██╗██║     ███████╗", 10);
+	Screen.SetText(54, Screen.Height - 2, L"╚═╝  ╚═╝╚═╝  ╚══╝ ╚════╝    ╚═╝   ╚══════╝╚═╝╚═╝╚═╝     ╚══════╝", 10);
 
 	Screen.SetRect(0, 0, 120, 22, 10);
-	Screen.SetText(48, 0, L"╣ Conway's Game of Life ╠", 10);
+	Screen.SetText(45, 0, L"╣ Conway's Game of Life ╠", 10);
 
 	if (Game.isPaused)
 	{
-		Screen.SetText(Game.Width - 7, Game.Height - 2, L"Pause", 1 + (int)(EpsaledTime * 12) % 15); /* Tęczowy efekt */
+		Screen.SetText(Game.Width - 32, Game.Height - 2, L"Game paused, press P to resume", 1 + (int)(EpsaledTime * 12) % 15); /* Tęczowy efekt */
 		Screen.SetPoint(CursorX, CursorY, 80);
 	}
 }
